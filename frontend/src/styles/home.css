@@ -1,0 +1,63 @@
+    .bci {
+    background-image: url('../assets/images/philipp-kammerer-6Mxb_mZ_Q8E-unsplash.jpg');
+    background-size:cover;
+    background-position: center;
+    width: 100%;
+    height: 65vh;
+    color: #fff;
+  }
+  
+  .content{
+    padding: 20px;
+  }
+ 
+  h1 {
+    font-size: 32px;
+    margin-bottom: 50px;
+    margin-right: 10px;
+  }
+  
+  p {
+    font-size: 18px;
+  }
+  
+  .experience__content h2 {
+    font-size  : 2rem;
+    font-weight: 500;
+    margin-top : 1rem;
+ }
+ 
+ .experience__content p {
+    font-size : 1.2rem;
+    color     : var(--text-color);
+    margin-top: 1rem;
+ }
+ 
+ .counter__wrapper {
+    margin-top: 1.6rem;
+ }
+ 
+ .counter__box span {
+    width          : 70px;
+    height         : 70px;
+    margin         : auto;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    background     : var(--primary-color);
+    color          : #fff;
+    font-size      : 1.2rem;
+    font-weight    : 600;
+    border-radius  : 10px 5px 10px 5px;
+ }
+ 
+ .counter__box h6 {
+    font-size : 0.8rem;
+    margin-top: 0.5rem;
+    color     : var(--text-color);
+ }
+ 
+ .experience__img img {
+    width: 90%;
+ }
+ 
