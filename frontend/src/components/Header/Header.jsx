@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useContext } from 'react'
 import { Container, Row, Button } from "reactstrap";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import './Header.css'
+import { AuthContext } from '../../context/AuthContext';
 
 const nav__links = [
    {
@@ -9,18 +10,24 @@ const nav__links = [
       display: "Home",
    },
    {
-      path: "/about",
+      path: "/#about",
       display: "About",
    },
    {
       path: "/tours",
-      display: "Tours",
+      display: "Attractions",
    },
 ];
 
 const Header = () => {
    const headerRef = useRef(null)
+   const navigate = useNavigate()
+   const {user,dispatch} = useContext(AuthContext) 
 
+   const logout = ()=>{
+      dispatch({type:'LOGOUT'})
+      navigate('/')
+   }
    const stickyHeaderFunc = () => {
       window.addEventListener('scroll', () => {
          if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -54,12 +61,19 @@ const Header = () => {
                   </div>
                   <div className="nav__right d-flex align-items-center gap-4">
                      <div className="nav__btns d-flex align-items-center gap-2">
-                        <Button className="bu"  size='sm'>
+                        {
+                           user? <>
+                           <h5 className='mb-0'>{user.username}</h5>
+                           <Button className="bu" size='sm' onClick={logout}>Logout</Button>
+                           </>:<>
+                           <Button className="bu"  size='sm'>
                            <Link to="/login">Login</Link>
                         </Button>
                         <Button className="bu"  size='sm'>
                            <Link to="/register">Register</Link>
                         </Button>
+                           </>
+                        }
                      </div>
 
                      <span className="mobile__menu">

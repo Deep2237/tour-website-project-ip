@@ -22,3 +22,37 @@ export const createReview = async(req,res)=>{
         .json({success:false,message:"failed to submit"});
     }
 } 
+
+export const getAllReviews = async (req, res) => {
+
+    try {
+      const reviews = await Review.find({})
+      res.status(200).json({
+        success: true,
+        message: "all data fetched",
+        data: reviews,
+      });
+    } catch (err) {
+      res.status(404).json({
+        success: false,
+        message: "failed to fetch all data",
+      });
+    }
+  };
+
+  export const getsingleReview = async (req, res) => {
+    const tourId = req.params.tourId
+    try {
+      const review = await Review.find(tourId.reviews.ObjectId)
+      res.status(200).json({
+        success: true,
+        message: "all data fetched",
+        data: review,
+      });
+    } catch (err) {
+      res.status(404).json({
+        success: false,
+        message: "failed to fetch all data",
+      });
+    }
+  };

@@ -16,14 +16,14 @@ ul {
 .bu a
 {
   text-decoration: none;
-  color:white;
+  color:#537188;
   font-size: small;
   text-align: center;
   font-weight: 500;
 }
 
 section {
-  padding: 20px 0px;
+  margin: 2px 0px;
 }
 
 .section__subtitle {

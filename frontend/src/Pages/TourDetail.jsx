@@ -1,40 +1,98 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import '../styles/tour-details.css'
-import tourData from '../assets/data/tours'
-import { Container, Row, Col, Form, ListGroup } from 'reactstrap'
-import { useParams } from 'react-router-dom'
+import { Container, Row, Col, Form, ListGroup, NavLink } from 'reactstrap'
+import { redirect, useNavigate, useParams } from 'react-router-dom'
 import avatar from '../assets/images/avatar.jpg'
+import calculateAvgRating from '../utils/avgRating.js'
 import Booking from '../components/Booking/Booking'
 import Newsletter from '../Shared/Newsletter'
+import useFetch from '../hooks/useFetch'
+import { Link } from 'react-router-dom'
+import { BASE_URL } from '../utils/config'
+import { AuthContext } from '../context/AuthContext'
 
 const TourDetail = () => {
    const {id} = useParams()
    const reviewMsgRef = useRef(null)
    const [tourRating, setTourRating] = useState(null)
-
+   // const [rev, setRev] = useState([]);
+   // const [refresh, setRefresh] = useState(false);
+   // const navigate = useNavigate()
+   const {user} = useContext(AuthContext)
    // fetch data from database
+   const {data:tour,loading,error} = useFetch(`${BASE_URL}/tours/${id}`)
+   // const {data:revi} = useFetch(`${BASE_URL}/review/${id}`)
 
-   const tour = tourData.find( tour =>tour.id===id)
-   const { photo, title, desc, price, reviews, city, address, distance, maxGroupSize,avgRating} = tour
+   // const tour = tourData.find( tour =>tour.id===id)
+   const { photo, title, desc, price, reviews, city, distance, maxGroupSize} = tour
  
+   const { totalRating, avgRating } = calculateAvgRating(reviews)
 
    const options = { day: 'numeric', month: 'long', year: 'numeric' }
 
-   const submitHandler = e => {
+   const submitHandler = async e => {
+      const reviewText = reviewMsgRef.current.value
       e.preventDefault();
-      const reviewText = reviewMsgRef.current.value;
+      try{
 
-      alert(`${reviewText},${tourRating}`);
+         if(!user || user===undefined || user === null)
+      {
+         alert('please sign in')  
+      }
+      const reviewObj = {
+         username:user?.username,
+         reviewText,
+         rating:tourRating
+      }
 
+         const res = await fetch(`${BASE_URL}/review/${id}`,{
+            method:'post',
+            headers:{
+               'content-type' : 'application/json'
+            },
+            credentials : 'include',
+            body:JSON.stringify(reviewObj),
+         });
+         const result = await res.json();
+         reviewMsgRef.current.value = '';
+         if(!res.ok){
+            return alert(result.message);
+         }
+         alert(result.message);
+         // setRefresh((prev) => !prev);
+      }
+      catch(err)
+      {
+         alert(err.message);
+      }
    }
-
+     
+   // useEffect(() => {
+   //    const fetchData = async () => {
+   //       try{
+   //          const res = await fetch(`${BASE_URL}/review/${tour.reviews._id}`)
+   //          const result = await res.json();
+   //       console.log(result.rev)
+   //       setRev(prev => ({ ...prev,rev: result }))
+   //       }
+   //       catch{
+   //          console.log('not found')
+   //       }
+   //  }
+   //  fetchData();
+   // }, [refresh]);
+  
    useEffect(() => {
       window.scrollTo(0, 0)
-   }, [tour])
+   }, [tour,reviews])
 
    return (
       <section>
          <Container>
+         {loading && <h4 className='text-center pt-5'>Loading.....</h4> }
+         {error && <h4 className='texr-center pt-5'>{error}</h4> }
+               {
+               !loading && !error &&
                <Row>
                   <Col lg='8'>
                      <div className="tour__content">
@@ -45,7 +103,7 @@ const TourDetail = () => {
                            <div className="d-flex align-items-center gap-5">
                               <span className="tour__rating d-flex align-items-center gap-1">
                                  <i class='ri-star-fill' style={{ 'color': 'black' }}></i> {avgRating === 0 ? null : avgRating}
-                                 <span>({reviews?.length})</span>
+                                 {totalRating === 0 ? ('Not rated') : (<span>({reviews?.length})</span>)}
                               </span>
 
                            </div>
@@ -73,7 +131,7 @@ const TourDetail = () => {
                               </div>
 
                               <div className="review__input">
-                                 <input type="text" ref={reviewMsgRef} placeholder='share your thoughts' required />
+                                 <input ref={reviewMsgRef} type="text" placeholder='share your thoughts' required />
                                  <button className='bu bs' type='submit'>
                                     Submit
                                  </button>
@@ -109,12 +167,11 @@ const TourDetail = () => {
                   </Col>
 
                   <Col lg='4'>
-                     <Booking tour={tour} avgRating={avgRating} />
+                     <Booking tour={tour} avgRating={avgRating} totalRating={totalRating}/>
                   </Col>
                </Row>
-      
+}
          </Container>
-         <Newsletter />
       </section>
 
    )

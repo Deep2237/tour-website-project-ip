@@ -3,16 +3,18 @@ import './booking.css'
 import { Form, FormGroup, ListGroup, ListGroupItem, Button } from 'reactstrap'
 
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
+import { BASE_URL } from '../../utils/config'
 
-const Booking = ({ tour, avgRating }) => {
+const Booking = ({ tour, avgRating,totalRating}) => {
    const { price, reviews, title } = tour
    const navigate = useNavigate()
-
+   const {user} = useContext(AuthContext)
 
    const [booking, setBooking] = useState({
-      userId: "01",
-      userEmail: "s@gmail.com",
-    //   tourName: title,
+      userId: user && user._id,
+      userEmail: user && user.email,
+      tourName: title,
       fullName: '',
       phone: '',
       guestSize: 1,
@@ -26,11 +28,33 @@ const Booking = ({ tour, avgRating }) => {
    const serviceFee = 10
    const totalAmount = Number(price) * Number(booking.guestSize) + Number(serviceFee)
 
-   const handleClick =  e => {
-      e.preventDefault()
-      console.log(booking)
-
-    navigate('/thankyou')
+   const handleClick = async e => {
+      e.preventDefault();
+      console.log(booking);
+      try{
+         if(!user || user===undefined || user === null)
+         {
+           return alert('please sign in');  
+         }
+   
+         const res = await fetch(`${BASE_URL}/booking`,{
+            method:'post',
+            headers:{
+               'content-type' : 'application/json'
+            },
+            credentials : 'include',
+            body:JSON.stringify(booking),
+         })
+         const result = await res.json()
+         if(!res.ok){
+            return alert(result.message);
+         }
+         navigate('/thankyou')
+      }
+      catch(err)
+      {
+         alert(err.message)
+      }
    }
 
    return (
@@ -38,8 +62,8 @@ const Booking = ({ tour, avgRating }) => {
          <div className="booking__top d-flex align-items-center justify-content-between">
             <h3>${price} <span>/per person</span></h3>
             <span className="tour__rating d-flex align-items-center">
-               <i class='ri-star-fill' style={{ 'color': 'black' }}></i>
-               {avgRating === 0 ? null : avgRating} ({reviews?.length})
+               <i class='ri-star-fill' style={{ 'color': 'black' }}></i>{avgRating === 0 ? null : avgRating}
+               {totalRating === 0 ? ('Not rated') : (<span>({reviews?.length})</span>)}
             </span>
          </div>
 
