@@ -1,7 +1,8 @@
 import React from 'react'
 import './footer.css'
-import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap'
+import { Container, Row, Col, ListGroupItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import logo from '../../assets/images/Travel4.png'
 
 const quick__links = [
    {
@@ -14,15 +15,11 @@ const quick__links = [
    },
    {
       path: '/tours',
-      display: 'Tours'
+      display: 'Attractions'
    },
 ]
 
 const quick__links2 = [
-   {
-      path: '/gallery',
-      display: 'Gallery'
-   },
    {
       path: '/login',
       display: 'Login'
@@ -34,16 +31,13 @@ const quick__links2 = [
 ]
 
 const Footer = () => {
-   const year = new Date().getFullYear()
-
    return (
       <footer className='footer'>
          <Container>
             <Row>
                <Col lg='3'>
-                  <div className="logo">
-                     Travel Guru
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, enim.</p>
+               <div className="logo">
+                     <img src={logo} alt="" />
                      <div className="social__link d-flex align-items-center gap-4">
                         <span>
                            <Link to='#'>
@@ -72,7 +66,7 @@ const Footer = () => {
                <Col lg='3'>
                   <h5 className="footer__link-title">Discover</h5>
 
-                  <ListGroup className='footer__quick-links'>
+                  <div className='footer__quick-links'>
                      {
                         quick__links.map((item, index) => (
                            <ListGroupItem key={index} className='ps-0 border-0'>
@@ -80,12 +74,12 @@ const Footer = () => {
                            </ListGroupItem>
                         ))
                      }
-                  </ListGroup>
+                  </div>
                </Col>
                <Col lg='3'>
                   <h5 className="footer__link-title">Quick Links</h5>
 
-                  <ListGroup className='footer__quick-links'>
+                  <div className='footer__quick-links'>
                      {
                         quick__links2.map((item, index) => (
                            <ListGroupItem key={index} className='ps-0 border-0'>
@@ -93,18 +87,18 @@ const Footer = () => {
                            </ListGroupItem>
                         ))
                      }
-                  </ListGroup>
+                  </div>
                </Col>
                <Col lg='3'>
                   <h5 className="footer__link-title">Contact</h5>
 
-                  <ListGroup className='footer__quick-links'>
+                  <div className='footer__quick-links'>
                      <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-3'>
                         <h6 className='mb-0 d-flex align-items-center gap-2'>
                            <span><i class='ri-map-pin-line'></i></span>
                            Address:
                         </h6>
-                        <p className='mb-0'>Lorem</p>
+                        <p className='mb-0'>Ahmedabad</p>
                      </ListGroupItem>
 
                      <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-3'>
@@ -113,7 +107,7 @@ const Footer = () => {
                            Email:
                         </h6>
 
-                        <p className='mb-0'>Lorem</p>
+                        <p className='mb-0'>Travelguru@gmail.com</p>
                      </ListGroupItem>
 
                      <ListGroupItem className='ps-0 border-0 d-flex align-items-center gap-3'>
@@ -122,11 +116,14 @@ const Footer = () => {
                            Phone:
                         </h6>
 
-                        <p className='mb-0'>Lorem</p>
+                        <p className='mb-0'>+91 7920354261</p>
                      </ListGroupItem>
-                  </ListGroup>
+                  </div>
                </Col>
             </Row>
+         </Container>
+         <Container>
+            <h5 className='copyright'>© 2015-2022 Travel Guru <br /> All Rights Reserved</h5>
          </Container>
       </footer>
    )
