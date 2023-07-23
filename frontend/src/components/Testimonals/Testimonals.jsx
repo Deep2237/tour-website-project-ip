@@ -1,104 +1,43 @@
 import React from 'react'
-import Slider from 'react-slick'
+import { Carousel } from 'react-responsive-carousel';
 import ava01 from '../../assets/images/ava-1.jpg'
 import ava02 from '../../assets/images/ava-2.jpg'
-import ava03 from '../../assets/images/ava-3.jpg'
+import './testimonial.css'
 
 const Testimonials = () => {
-   const settings = {
-      dots:true,
-      infinite:true,
-      autoplay:true,
-      speed:1000,
-      swipeToSlide:true,
-      autoplaySpeed:2000,
-      slidesToShow:3,
 
-      responsive: [
-         {
-            breakpoint: 992,
-            settings: {
-               slidesToShow: 2,
-               slidesToScroll: 1,
-               infinite: true,
-               dots: true,
-            },
-            breakpoint: 576,
-            settings: {
-               slidesToShow: 1,
-               slidesToScroll: 1,
-               infinite: true,
-               dots: true,
-            },
-         }
-      ]
-   }
+   return (
+      <section className="testimonial-section">
+         <Carousel infiniteLoop
+        autoPlay
+        showStatus={false}
+        showArrows={false}
+        showThumbs={false}
+        interval={5000}>
+            <div className="testimonial-slide">
+               <div className='tf'>
+            <img src={ava01} alt="Testimonial 1" className="testimonial-image" />
+               <h3 className="testimonial-name">Nax Patel</h3>
+               </div>
+               <div className="testimonial-content">
+                  <p className="testimonial-description">This trekking organization is excellent. Their costs are minimal.You can have the experience of trekking at the lowest cost with basic amenities and the best available trek leaders. The best part is the food they provide during the trek. Their cooks are the best I have experienced so far with different organizations. The food they serve is healthy and a balanced diet, which is proper food aid for trekking. You can expect healthy food, and there are no Maggi or biscuits. Don't expect luxury, as you are going on a trek for real adventure. They also serve Jain food, even for one person. We have seen other agencies do nothing due to the weather, but the trek leaders at Travel Guru put their best effort to make your goal achievable with safety and without any danger. Go for it! 🤩</p>
+               </div>
+               </div>
 
-   return <Slider {...settings}>
-      <div className="testimonial py-4 px-3">
-         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Minus sit, explicabo provident hic distinctio molestias voluptates nobis alias
-            placeat suscipt earum debitits recusandae voluptate illum expedita 
-            corrupti aliquid doloribus delectus?
-         </p>
 
-         <div className='d-flex align-items-center gap-4 mt-3'>
-            <img src={ava01} className='w-25 h-25 rounded-2' alt="" />
-            <div>
-               <h6 className='mb-0 mt-3'>John Doe</h6>
-               <p>Customer</p>
-            </div>
-         </div> 
-      </div>
+               <div className="testimonial-slide">
+               <div className='tf'>
+            <img src={ava02} alt="Testimonial 2" className="testimonial-image" />
+               <h3 className="testimonial-name">Khushi Patel</h3>
+               </div>
+               <div className="testimonial-content">
+                  <p className="testimonial-description">Best memories emerge from here! I have completed two winter treks, Manali and Dalhousie from Travel Guru. The services are exceptional when compared to other trekking organizations as I have been with others also. Best quality home-made food, separate accommodation for girls and boys felt safe, if being a girl you wished to go on a solo trip, I bet this is the safest. The most motivating instructors who put in every effort to bring us to the Summit, paragliding became so enjoyable and cheaper with Travel Guru. The registration here was as simple as a piece of cake. The staff is very coordinated. Manali is on the bucket list of everyone, but with Travel World it was fulfilled with the whole heart. Highly recommended 👌 </p>
+               </div>
+               </div>
 
-      <div className="testimonial py-4 px-3">
-         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Minus sit, explicabo provident hic distinctio molestias voluptates nobis alias
-            placeat suscipt earum debitits recusandae voluptate illum expedita 
-            corrupti aliquid doloribus delectus?
-         </p>
-
-         <div className='d-flex align-items-center gap-4 mt-3'>
-            <img src={ava02} className='w-25 h-25 rounded-2' alt="" />
-            <div>
-               <h6 className='mb-0 mt-3'>Lia Franklin</h6>
-               <p>Customer</p>
-            </div>
-         </div> 
-      </div>
-
-      <div className="testimonial py-4 px-3">
-         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Minus sit, explicabo provident hic distinctio molestias voluptates nobis alias
-            placeat suscipt earum debitits recusandae voluptate illum expedita 
-            corrupti aliquid doloribus delectus?
-         </p>
-
-         <div className='d-flex align-items-center gap-4 mt-3'>
-            <img src={ava03} className='w-25 h-25 rounded-2' alt="" />
-            <div>
-               <h6 className='mb-0 mt-3'>John Doe</h6>
-               <p>Customer</p>
-            </div>
-         </div> 
-      </div>
-
-      <div className="testimonial py-4 px-3">
-         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Minus sit, explicabo provident hic distinctio molestias voluptates nobis alias
-            placeat suscipt earum debitits recusandae voluptate illum expedita 
-            corrupti aliquid doloribus delectus?
-         </p>
-
-         <div className='d-flex align-items-center gap-4 mt-3'>
-            <img src={ava03} className='w-25 h-25 rounded-2' alt="" />
-            <div>
-               <h6 className='mb-0 mt-3'>John Doe</h6>
-               <p>Customer</p>
-            </div>
-         </div> 
-      </div>
-   </Slider>
-}
+         </Carousel>
+      </section>
+   )
+};
 
 export default Testimonials
