@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import CommonSection from '../Shared/CommonSection'
-import tourData from '../assets/data/tours'
 import '../styles/tour.css'
 import TourCard from './../Shared/TourCard'
 import SearchBar from './../Shared/Searchbar'
-import Newsletter from './../Shared/Newsletter'
 import { Col, Container, Row } from 'reactstrap'
 import useFetch from '../hooks/useFetch'
 import { BASE_URL } from '../utils/config'
@@ -25,7 +23,7 @@ const Tours = () => {
 
   return (
     <>
-         <CommonSection title={"All Tours"} />
+         <CommonSection title={"Attractions & Tours"} />
          <section>
             <Container>
                <Row>
@@ -34,7 +32,7 @@ const Tours = () => {
             </Container>
          </section>
 
-         <section className='pt-0'>
+         <section className='ts pt-0'>
             <Container>
                {loading && <h4 className='text-center pt-5'>Loading.....</h4> }
                {error && <h4 className='texr-center pt-5'>{error}</h4> }

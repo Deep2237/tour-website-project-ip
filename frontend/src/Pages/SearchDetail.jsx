@@ -3,7 +3,6 @@ import CommonSection from '../Shared/CommonSection'
 import {Col, Container, Row } from 'reactstrap'
 import { useLocation } from 'react-router-dom'
 import TourCard from '../Shared/TourCard'
-import NewsLetter from '../Shared/Newsletter'
 
 const SearchDetail = () => {
 
@@ -22,7 +21,6 @@ const SearchDetail = () => {
         </Row>
       </Container>
     </section>
-    <NewsLetter/>
   </>
   )
   }

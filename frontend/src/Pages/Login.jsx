@@ -1,13 +1,18 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Container, Row, Col, Form, FormGroup, Button } from 'reactstrap'
 import '../styles/login.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import loginImg from '../assets/images/login.png'
 import userIcon from '../assets/images/user.png'
 import { AuthContext } from '../context/AuthContext'
 import { BASE_URL } from '../utils/config'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+   useEffect(() => {
+      window.scrollTo(0,0)
+      }, [])
    const [credentials, setCredentials] = useState({
       email: undefined,
       password: undefined
@@ -36,11 +41,23 @@ const Login = () => {
          })
          const result = await res.json()
 
-         if(!res.ok)alert(result.message)
-         console.log(result.data);
+         if(!res.ok)
+         {
+             return toast.error(result.message,{
+               position:"top-center",
+               theme:"dark"
+              });
+         }
+              toast.success(`Welcome ${result.data.username}`,{
+               position:"top-center",
+               autoClose: 1000,
+               theme:"dark"
+              });
          dispatch({type:'LOGIN_SUCCESS',payload:result.data})
-         navigate('/')
-   }
+         const timeoutId = setTimeout(() => {
+            navigate('/');
+          }, 2000);
+         }
    catch(err)
    {
       dispatch({type:'LOGIN_FAILURE',payload:err.message})
@@ -48,6 +65,7 @@ const Login = () => {
    }
    }
    return (
+      <>
       <section>
          <Container>
             <Row>
@@ -79,6 +97,8 @@ const Login = () => {
             </Row>
          </Container>
       </section>
+      <ToastContainer/>
+      </>
    )
 }
 

@@ -19,7 +19,7 @@ export const createReview = async(req,res)=>{
     catch(err){
         res
         .status(500)
-        .json({success:false,message:"failed to submit"});
+        .json({success:false,message:"Please Fill all the Details"});
     }
 } 
 

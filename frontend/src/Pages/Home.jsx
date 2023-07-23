@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import '../styles/home.css'
 import { Container, Row, Col, CardSubtitle } from 'reactstrap'
@@ -12,6 +12,11 @@ import NewsLetter from '../Shared/Newsletter'
 
 
 const Home = () => {
+   
+   useEffect(() => {
+   window.scrollTo(0,0)
+   }, [])
+
    return <>
       <section>
          {/* <Container> */}
@@ -33,7 +38,7 @@ const Home = () => {
          <Container>
             <Row>
                <Col lg='12' className='mb-5'>
-                  <h2  id='about' className='featured__tour-title'>⭐Our featured tours⭐</h2>
+                  <h2  className='featured__tour-title'>⭐Our featured tours⭐</h2>
                </Col>
                <FeaturedTourList />
             </Row>

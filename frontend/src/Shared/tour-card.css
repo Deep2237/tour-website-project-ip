@@ -16,7 +16,9 @@
     height: 35vh;
     border-radius: 5px 5px 0 0;
  }
-
+.ss{
+   font-size: small;
+}
  .fea{
    color: white !important;
  }

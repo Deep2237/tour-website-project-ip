@@ -11,9 +11,14 @@
     font-size      : 1rem;
     cursor         : pointer;
     font-weight    : 500;
+    margin-bottom: 1rem;
  }
  
  .active__page {
-    background: var(--secondary-color);
+    background: white;
     color     : blue !important;
+ }
+
+ .ts{
+   margin-top: 1rem;
  }

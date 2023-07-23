@@ -33,7 +33,7 @@ const TourCard = ({tour}) => {
                <h5 className='tour__title'> <i class='ri-map-pin-line'></i> {city}</h5>
 
                <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
-                   <span className='d-flex align-items-center gap-1'> <h5>${price}/per person </h5></span>
+                   <span className='d-flex align-items-center gap-1'> <h5>₹ {price}<span className='ss'>/per person</span></h5></span>
                      <span className='bo'><h5>Book Now</h5></span>
                </div>
             </CardBody>

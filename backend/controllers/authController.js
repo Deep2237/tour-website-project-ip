@@ -24,7 +24,7 @@ export const register = async(req,res) => {
     {
         res.status(500).json({
             success:false,
-            message:"failed to create",
+            message:"User Already Exists",
         })
     }
 };
@@ -36,7 +36,7 @@ export const login = async(req,res) => {
         if(!user){
             return res.status(404).json({
                 success:false,
-                message:"user not found"
+                message:"User not found"
             })
         }
 
@@ -46,7 +46,7 @@ export const login = async(req,res) => {
         {
             return res.status(401).json({
                 success:false,
-                message:"incorrect email or password"
+                message:"Incorrect email or password"
             })
         }
         const { password, role, ...rest } = user._doc
@@ -58,7 +58,7 @@ export const login = async(req,res) => {
             expires:token.expiresIn,
         }).status(200).json({
             success:true,
-            message:'successfully login',
+            message:'Successfully Login',
             data : { ...rest},
         });
 
@@ -67,7 +67,7 @@ export const login = async(req,res) => {
     {
         res.status(500).json({
             success:false,
-            message:"Failed to login",
+            message:"Failed to Login",
         });
     }
 };

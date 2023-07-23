@@ -3,6 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
+
 
 a {
   text-decoration: none;
@@ -13,10 +17,10 @@ ul {
   list-style: none;
 }
 
-.bu a
+.bu a,.usb
 {
   text-decoration: none;
-  color:#537188;
+  color:#537188 !important;
   font-size: small;
   text-align: center;
   font-weight: 500;

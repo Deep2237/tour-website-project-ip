@@ -3,6 +3,8 @@ import { Container, Row, Button } from "reactstrap";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import './Header.css'
 import { AuthContext } from '../../context/AuthContext';
+import Logo from '../../assets/images/Travel4.png'
+
 
 const nav__links = [
    {
@@ -10,7 +12,7 @@ const nav__links = [
       display: "Home",
    },
    {
-      path: "/#about",
+      path: "/about",
       display: "About",
    },
    {
@@ -21,6 +23,7 @@ const nav__links = [
 
 const Header = () => {
    const headerRef = useRef(null)
+   const menuRef = useRef(null)
    const navigate = useNavigate()
    const {user,dispatch} = useContext(AuthContext) 
 
@@ -43,14 +46,19 @@ const Header = () => {
 
       return window.removeEventListener('scroll', stickyHeaderFunc)
    })
+
+   const toggleMenu = () => menuRef.current.classList.toggle('show__menu')
+
    
    return (
       <header className="header" ref={headerRef}>
          <Container>
             <Row>
                <div className="nav__wrapper d-flex align-items-centre justify-content-between">
-                  <div className="logo">Travel Guru</div>
-                  <div className="navigation">
+               <div className="logo">
+                     <img src={Logo} alt="" />
+                  </div>
+                  <div className="navigation" ref={menuRef} onClick={toggleMenu}>
                      <ul className="menu d-flex align-items-center  gap-5">
                         {nav__links.map((item, index) => (
                            <li className="nav__item" key={index}>
@@ -63,8 +71,8 @@ const Header = () => {
                      <div className="nav__btns d-flex align-items-center gap-2">
                         {
                            user? <>
-                           <h5 className='mb-0'>{user.username}</h5>
-                           <Button className="bu" size='sm' onClick={logout}>Logout</Button>
+                           <h5 className='us mb-1'>{user.username}</h5>
+                           <Button className="usb bu" size='sm' onClick={logout}>Logout</Button>
                            </>:<>
                            <Button className="bu"  size='sm'>
                            <Link to="/login">Login</Link>
@@ -76,7 +84,7 @@ const Header = () => {
                         }
                      </div>
 
-                     <span className="mobile__menu">
+                     <span className="mobile__menu" onClick={toggleMenu}>
                         <i class="ri-menu-line"></i>
                      </span>
                   </div>
