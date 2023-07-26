@@ -123,7 +123,7 @@ const Footer = () => {
             </Row>
          </Container>
          <Container>
-            <h5 className='copyright'>© 2015-2022 Travel Guru <br /> All Rights Reserved</h5>
+            <h5 className='copyright'>© 2022-2023 Travel Guru <br /> All Rights Reserved</h5>
          </Container>
       </footer>
    )
