@@ -7,3 +7,11 @@
   .di{
     margin-bottom: 2rem;
   }
+
+@media only screen and (max-width: 576px) {
+    .carousel-image {
+      max-width:55rem;
+      height: 30vh;
+      padding-left: 8rem;
+    }  
+ }
