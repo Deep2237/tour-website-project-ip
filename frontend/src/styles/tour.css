@@ -22,3 +22,15 @@
  .ts{
    margin-top: 1rem;
  }
+
+@media only screen and (max-width: 576px) {
+   .fss{
+      /* height: 30rem !important; */
+      width: 50rem !important;
+     margin-left: 65px !important;
+   }
+
+   .pagination{
+      margin-left: 142px;
+   }
+}
