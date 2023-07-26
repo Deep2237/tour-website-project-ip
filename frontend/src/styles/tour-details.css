@@ -202,4 +202,16 @@
     font-size: 1rem;
     color: black;
  }
+
+@media only screen and (max-width: 576px) {
+   .tour__content{
+      width: 500px !important;
+     margin-left: 15px !important;
+   }
+
+   .booking
+   {
+      width: 450px;
+   }
+}
  
