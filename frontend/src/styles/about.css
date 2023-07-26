@@ -36,3 +36,13 @@
     transform:rotateY(360deg);
     ;
   }
+
+@media only screen and (max-width: 576px) {
+    .gallery,.About__title{
+      margin-left: 139px;
+    }
+
+    .pa{
+      width: 500px;
+    }
+ }
