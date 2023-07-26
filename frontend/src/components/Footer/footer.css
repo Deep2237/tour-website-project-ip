@@ -60,3 +60,22 @@
     text-align: center;
     font-size: 1.2rem;
  }
+
+@media only screen and (max-width: 768px) {
+  
+}
+
+@media only screen and (max-width: 545px) {
+   
+
+   .footer{
+       width:34rem;
+   }
+}
+
+@media only screen and (max-width: 1024) {
+
+   .footer{
+   width: 200%;
+   }
+}
